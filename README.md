@@ -1,3 +1,19 @@
+## Overview
+Uses SAM3 to segment images in Figma.
+
+## TODO
+- [ ] allow selecting point clicks to specify specific parts of the image are foreground or background
+- [ ] allow tuning threshold used by SAM3, exposing mask-logit threshold as a slider to allow fine tuning how precise masks are
+- mask post processing (probably want toggles for these in the UI in case they lead to problems on specific prompts):
+  - [ ] Douglas-Peuker path simplification with epsilon 1-2px before sending vector back to Figma, so that the resulting vector is more hand editable
+  - don't really understand these, would probably want toggles too because they could cause their own problems in particular cases
+    - Hole-fill: flood-fill background from image edges, anything still 0 inside is a hole, set to 1.
+    - Morphology: 1-2 px erode-then-dilate (opening) to drop noise; dilate-then-erode (closing) to seal gaps.
+    - Gaussian smooth the logit before thresholding for cleaner edges.
+- [ ] allow exporting rects/point selections/prompts back to Figma as named shapes/text fields and allow re-importing them to allow saving prompts so that it's possible to refine in the future as desired
+
+---
+
 Below are the steps to get your plugin running. You can also find instructions at:
 
   https://www.figma.com/plugin-docs/plugin-quickstart-guide/
