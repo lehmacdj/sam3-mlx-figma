@@ -198,7 +198,10 @@ async function placeImageWithMask(msg: ImageMaskMessage): Promise<void> {
 
     const parent = (source.parent ?? figma.currentPage) as BaseNode &
       ChildrenMixin;
-    parent.appendChild(maskNode);
+    // Mask must be the bottom child of the group so siblings above it are
+    // clipped — insert mask just before the source instead of appending.
+    const sourceIdx = parent.children.indexOf(source);
+    parent.insertChild(sourceIdx >= 0 ? sourceIdx : parent.children.length, maskNode);
 
     const group = figma.group([maskNode, source], parent);
     group.name =
