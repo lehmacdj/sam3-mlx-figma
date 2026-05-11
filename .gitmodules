@@ -1,0 +1,3 @@
+[submodule "sam3-mlx"]
+	path = sam3-mlx
+	url = git@github.com:lehmacdj/mlx_sam3.git
