@@ -6,3 +6,6 @@ node_modules
 out/
 dist/
 code.js
+
+# submodules (need to be ignored so that jj doesn't mess with them)
+sam3-mlx
